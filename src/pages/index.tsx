@@ -1,21 +1,6 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
-import styled from "styled-components";
-
-const inter = Inter({ subsets: ["latin"] });
+import React from "react";
+import MainPage from "../components/page/Main";
 
 export default function Home() {
-  return (
-    <>
-      <StyledContainer>
-        <h2>main</h2>
-      </StyledContainer>
-    </>
-  );
+  return <MainPage />;
 }
-
-const StyledContainer = styled.div`
-  padding: 30px 30px;
-`;
