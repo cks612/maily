@@ -2,8 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import useSWR, { useSWRConfig } from "swr";
+import { fetcher } from "../../../lib/fetcher";
 
 const MainPage = () => {
+  const a = "searchDailyBoxOfficeList";
+  const { data, error } = useSWR(["/api/movie", a], fetcher);
+  console.log(data);
+  // const { cache } = useSWRConfig();
+  // console.log(cache);
   return (
     <StyledContainer>
       {/* component */}
