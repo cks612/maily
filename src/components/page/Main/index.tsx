@@ -9,9 +9,9 @@ import Card from "../../Movie/DailyMovie";
 const MainPage = () => {
   const urlOption = "searchDailyBoxOfficeList";
   const { data, error } = useSWR(["/api/movie", urlOption], fetcher);
-  console.log(data);
-  // const { cache } = useSWRConfig();
-  // console.log(cache);
+
+  const { cache } = useSWRConfig();
+  console.log(cache);
   return (
     <StyledContainer>
       {/* component */}

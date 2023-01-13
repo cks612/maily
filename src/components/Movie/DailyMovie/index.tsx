@@ -7,6 +7,7 @@ import MovieCard from "../MovieCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { NO_IMAGE } from "../../../constant/noImage";
 
 interface DataProps {
   items: MovieDataProps[];
@@ -37,10 +38,10 @@ const Card = ({ items }: DataProps) => {
                 key={rnum}
                 rnum={rnum}
                 movieNm={movieNm}
-                subtitle={subtitle}
-                userRating={userRating}
+                subtitle={subtitle ? subtitle : "정보가 없습니다"}
+                userRating={userRating ? userRating : "평점이 없습니다"}
                 link={link}
-                image={image}
+                image={image ? image : NO_IMAGE}
               />
             );
           })}
