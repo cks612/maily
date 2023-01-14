@@ -1,23 +1,34 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { MovieDataProps } from "../../../pages/api/movie";
+import { DataProcessingProps, MovieDataProps } from "../../../pages/api/movie";
 
 const MovieCard = ({
-  rnum,
-  movieNm,
-  subtitle,
-  userRating,
+  rank,
+  title,
+  audiAcc,
   link,
+  openDt,
+  genre,
   image,
-}: MovieDataProps) => {
+}: DataProcessingProps) => {
   return (
     <CardWrapper>
-      <Ranking>{rnum}</Ranking>
-      <Image src={image!} width={130} height={200} alt="moviePoster" priority />
-      <Title>{movieNm}</Title>
-      <SubTitle>{subtitle}</SubTitle>
-      <Rating>평점 : {userRating}</Rating>
+      <Ranking>{rank}</Ranking>
+      <Image src={image!} width={150} height={200} alt="moviePoster" priority />
+
+      <CardContainer>
+        <Title>{title}</Title>
+        <Description>
+          장르 : <span>{genre}</span>
+        </Description>
+        <Description>
+          관객 수 : <span>{audiAcc}</span>
+        </Description>
+        <Description>
+          개봉 : <span>{openDt}</span>
+        </Description>
+      </CardContainer>
     </CardWrapper>
   );
 };
@@ -27,9 +38,8 @@ export default MovieCard;
 const CardWrapper = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   padding: 20px 20px;
   font-size: 1em;
   color: #fff;
@@ -37,28 +47,23 @@ const CardWrapper = styled.div`
   border-radius: 20px;
 
   img {
+    width: 100%;
     height: auto;
   }
 `;
 
-const Title = styled.h2`
-  font-size: 0.7em;
-  font-weight: 900;
-  text-align: center;
-  display: -webkit-box;
-  width: 120px;
-  overflow: hidden;
-  vertical-align: top;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
 `;
-const SubTitle = styled.h3`
-  font-size: 0.5em;
-  text-align: center;
+
+const Title = styled.h2`
+  font-size: 0.8em;
+  font-weight: 900;
   display: -webkit-box;
-  width: 120px;
+  width: 170px;
   overflow: hidden;
   vertical-align: top;
   text-overflow: ellipsis;
@@ -67,8 +72,15 @@ const SubTitle = styled.h3`
   -webkit-line-clamp: 1;
 `;
 
-const Rating = styled.p`
-  font-size: 0.3em;
+const Description = styled(Title)`
+  font-size: 0.5em;
+  font-weight: 900;
+  width: 170px;
+
+  span {
+    font-size: 0.3em;
+    font-weight: 500;
+  }
 `;
 
 const Ranking = styled.div`

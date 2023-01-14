@@ -1,6 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { MOVIE, NAVER_SEARCH } from "../../../lib/axios";
-import { getFormatData } from "../../../utils/formatData";
+import { MOVIE, KMDB } from "../../../lib/axios";
+import {
+  ActorProps,
+  getFormatData,
+  MovieDirectorsProps,
+  RatingProps,
+} from "../../../utils/formatData";
 
 export interface MovieDataProps {
   rnum?: string;
@@ -28,53 +33,34 @@ export interface MovieDataProps {
   actor?: string;
   userRating?: string;
 }
-export interface SearchMovieProps {
-  status: string;
-  value: {
-    statis: number;
-    statusText: string;
-    headers: [];
-    config: [];
-    request: [];
-    data: ValueDataProps;
-  };
+export interface DataProcessingProps {
+  rank?: string;
+  title?: string;
+  openDt?: string;
+  audiAcc?: string;
+  directorNm?: MovieDirectorsProps;
+  link?: string;
+  image?: string;
+  ratingGrade?: RatingProps;
+  actor?: ActorProps;
+  genre?: string;
 }
-interface ValueDataProps {
-  lastBuildDate: string;
-  total: number;
-  start: number;
-  display: number;
-  items: SearchedDataProps[];
-}
-
-interface SearchedDataProps {
-  title: string;
-  link: string;
-  image: string;
-  subtitle: string;
-  pubDate: string;
-  director: string;
-  actor: string;
-  userRating: string;
-}
-
 const naverNews = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data } = await MOVIE.get(
-    `/kobisopenapi/webservice/rest/boxoffice/${req.query.q}.json?key=b7537dece115ba9accb305e88e2799d2&targetDt=20230111`
+    `/kobisopenapi/webservice/rest/boxoffice/${req.query.q}.json?key=b7537dece115ba9accb305e88e2799d2&targetDt=20230113`
   );
 
-  const searchList = data.boxOfficeResult.dailyBoxOfficeList;
+  const movieData = data.boxOfficeResult.dailyBoxOfficeList;
 
-  const getSearchData: any = await Promise.allSettled(
-    searchList.map(async (list: MovieDataProps) => {
-      const searchData = await NAVER_SEARCH.get(
-        `/search/movie.json?query=${list.movieNm}&start=1&display=1&yearfrom=2022&yearto=2023`
+  const searchData = await Promise.allSettled(
+    movieData.map(async (list: MovieDataProps) => {
+      const result = await KMDB.get(
+        `/search_json2.jsp?collection=kmdb_new2&releaseDts=20221101&releaseDte=20231231&listCount=1&title=${list.movieNm}&ServiceKey=WK13388M4RFT56O24X8T`
       );
-      return searchData;
+      return result.data.Data[0].Result;
     })
   );
-
-  return res.status(200).json(getFormatData(searchList, getSearchData));
+  return res.status(200).json(getFormatData(movieData, searchData));
 };
 
 export default naverNews;

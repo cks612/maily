@@ -9,11 +9,9 @@ export const MOVIE = axios.create({
   withCredentials: true,
 });
 
-export const NAVER_SEARCH = axios.create({
-  baseURL: "https://openapi.naver.com/v1",
+export const KMDB = axios.create({
+  baseURL: "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api",
   headers: {
-    "X-Naver-Client-Id": NAVER_CLIENT_ID,
-    "X-Naver-Client-Secret": NAVER_CLIENT_SECRET,
     Accept: "application/json",
   },
   withCredentials: true,
