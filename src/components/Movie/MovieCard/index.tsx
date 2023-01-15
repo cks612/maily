@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { DataProcessingProps, MovieDataProps } from "../../../pages/api/movie";
+import { DataProcessingProps } from "../../../pages/api/movie";
 
 const MovieCard = ({
   rank,
@@ -23,7 +23,7 @@ const MovieCard = ({
           장르 : <span>{genre}</span>
         </Description>
         <Description>
-          관객 수 : <span>{audiAcc}</span>
+          관객 : <span>{audiAcc}</span>
         </Description>
         <Description>
           개봉 : <span>{openDt}</span>

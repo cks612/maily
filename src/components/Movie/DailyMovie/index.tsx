@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { DataProcessingProps, MovieDataProps } from "../../../pages/api/movie";
+import { DataProcessingProps } from "../../../pages/api/movie";
 import ContentTitle from "../../Content/ContentTitle";
-import ContentWrapper from "../../Content/ContentWrapper";
 import MovieCard from "../MovieCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -26,7 +25,7 @@ const Card = ({ items }: DataProps) => {
     cssEase: "linear",
   };
   return (
-    <ContentWrapper>
+    <CardWrapper>
       <ContentTitle>일일 박스 오피스</ContentTitle>
 
       <StyledDailyMovie>
@@ -48,14 +47,22 @@ const Card = ({ items }: DataProps) => {
           })}
         </StyledSlider>
       </StyledDailyMovie>
-    </ContentWrapper>
+    </CardWrapper>
   );
 };
 
 export default Card;
 
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 450px;
+  padding: 20px 20px;
+`;
+
 const StyledDailyMovie = styled.div`
-  height: 550px;
+  height: 100%;
 `;
 
 const StyledSlider = styled(Slider)`

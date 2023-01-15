@@ -4,11 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
-import Card from "../../Movie/DailyMovie";
+import DailyMovie from "../../Movie/DailyMovie";
 
 const MainPage = () => {
-  const urlOption = "searchDailyBoxOfficeList";
-  const { data, error } = useSWR(["/api/movie", urlOption], fetcher);
+  const MOVIE_DAILY = "searchDailyBoxOfficeList";
+  const MOVIE_WEEK = "searchWeeklyBoxOfficeList";
+  const { data, error } = useSWR(["/api/movie", MOVIE_DAILY], fetcher);
+  const { data: weekList, error: weekError } = useSWR(
+    ["/api/movie", MOVIE_WEEK],
+    fetcher
+  );
+
+  console.log(weekList);
 
   return (
     <StyledContainer>
@@ -32,7 +39,7 @@ const MainPage = () => {
         </InputWrapper>
       </StyledMainVideo>
 
-      <Card items={data} />
+      <DailyMovie items={data} />
 
       <h2>main</h2>
       <h2>main</h2>
@@ -55,6 +62,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+
   overflow: hidden;
   /* padding: 20px 30px; */
 `;

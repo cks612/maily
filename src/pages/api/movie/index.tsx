@@ -6,6 +6,7 @@ import {
   MovieDirectorsProps,
   RatingProps,
 } from "../../../utils/formatData";
+import { formatDate } from "../../../utils/getDate";
 
 export interface MovieDataProps {
   rnum?: string;
@@ -46,16 +47,32 @@ export interface DataProcessingProps {
   genre?: string;
 }
 const naverNews = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { data } = await MOVIE.get(
-    `/kobisopenapi/webservice/rest/boxoffice/${req.query.q}.json?key=b7537dece115ba9accb305e88e2799d2&targetDt=20230113`
-  );
+  const dailyDate = formatDate("day");
+  const releaseDate = formatDate("month");
+  const endOfYear = formatDate("year");
+  const weekDate = formatDate("week");
 
-  const movieData = data.boxOfficeResult.dailyBoxOfficeList;
+  const movieType = req.query.q;
+  let movieData = [];
+
+  if (movieType === "searchDailyBoxOfficeList") {
+    const { data } = await MOVIE.get(
+      `/kobisopenapi/webservice/rest/boxoffice/${movieType}.json?key=b7537dece115ba9accb305e88e2799d2&targetDt=${dailyDate}`
+    );
+    movieData = data.boxOfficeResult.dailyBoxOfficeList;
+  }
+
+  if (movieType === "searchWeeklyBoxOfficeList") {
+    const { data } = await MOVIE.get(
+      `/kobisopenapi/webservice/rest/boxoffice/${movieType}.json?key=b7537dece115ba9accb305e88e2799d2&targetDt=${weekDate}&weekGb=0`
+    );
+    movieData = data.boxOfficeResult.weeklyBoxOfficeList;
+  }
 
   const searchData = await Promise.allSettled(
     movieData.map(async (list: MovieDataProps) => {
       const result = await KMDB.get(
-        `/search_json2.jsp?collection=kmdb_new2&releaseDts=20221101&releaseDte=20231231&listCount=1&title=${list.movieNm}&ServiceKey=WK13388M4RFT56O24X8T`
+        `/search_json2.jsp?collection=kmdb_new2&releaseDts=${releaseDate}&releaseDte=${endOfYear}&listCount=1&title=${list.movieNm}&ServiceKey=WK13388M4RFT56O24X8T`
       );
       return result.data.Data[0].Result;
     })
