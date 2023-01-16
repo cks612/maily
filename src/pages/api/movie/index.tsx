@@ -34,7 +34,7 @@ export interface MovieDataProps {
   actor?: string;
   userRating?: string;
 }
-export interface DataProcessingProps {
+export interface FilteredMovieDataProps {
   rank?: string;
   title?: string;
   openDt?: string;

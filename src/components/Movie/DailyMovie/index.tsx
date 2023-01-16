@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DataProcessingProps } from "../../../pages/api/movie";
+import { FilteredMovieDataProps } from "../../../pages/api/movie";
 import ContentTitle from "../../Content/ContentTitle";
 import MovieCard from "../MovieCard";
 import Slider from "react-slick";
@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { NO_IMAGE } from "../../../constant/noImage";
 
 interface DataProps {
-  items: DataProcessingProps[];
+  items: FilteredMovieDataProps[];
 }
 
 const Card = ({ items }: DataProps) => {
@@ -30,7 +30,7 @@ const Card = ({ items }: DataProps) => {
 
       <StyledDailyMovie>
         <StyledSlider {...settings}>
-          {items?.map((item: DataProcessingProps) => {
+          {items?.map((item: FilteredMovieDataProps) => {
             const { title, audiAcc, link, image, rank, genre, openDt } = item;
             return (
               <MovieCard

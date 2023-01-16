@@ -13,18 +13,23 @@ export default function Home({ fallback }: any) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const urlOption = "searchDailyBoxOfficeList";
+  const urlOption = ["searchDailyBoxOfficeList", "searchWeeklyBoxOfficeList"];
 
-  const homeInitialData = await fetcher([
+  const dailyInitialData = await fetcher([
     "http://localhost:3000/api/movie",
-    urlOption,
+    urlOption[0],
+  ]);
+  const weeklyInitialData = await fetcher([
+    "http://localhost:3000/api/movie",
+    urlOption[1],
   ]);
 
   return {
     props: {
       fallback: {
         // unstable_serialize()에 배열 스타일의 키
-        [unstable_serialize(["/api/movie", urlOption])]: homeInitialData,
+        [unstable_serialize(["/api/movie", urlOption[0]])]: dailyInitialData,
+        [unstable_serialize(["/api/movie", urlOption[1]])]: weeklyInitialData,
       },
     },
   };
