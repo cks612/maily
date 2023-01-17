@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { NO_IMAGE } from "../../../constant/noImage";
+import Link from "next/link";
 
 interface DataProps {
   items: FilteredMovieDataProps[];
@@ -33,16 +34,20 @@ const Card = ({ items }: DataProps) => {
           {items?.map((item: FilteredMovieDataProps) => {
             const { title, audiAcc, link, image, rank, genre, openDt } = item;
             return (
-              <MovieCard
-                key={Math.random()}
-                rank={rank}
-                title={title}
-                genre={genre}
-                openDt={openDt}
-                audiAcc={audiAcc ? parseInt(audiAcc).toLocaleString() : "0"}
-                link={link}
-                image={image ? image : NO_IMAGE}
-              />
+              <>
+                <Link href={link ? link : ""} target="_blank">
+                  <MovieCard
+                    key={Math.random()}
+                    rank={rank}
+                    title={title}
+                    genre={genre}
+                    openDt={openDt}
+                    audiAcc={audiAcc ? parseInt(audiAcc).toLocaleString() : "0"}
+                    link={link}
+                    image={image ? image : NO_IMAGE}
+                  />
+                </Link>
+              </>
             );
           })}
         </StyledSlider>

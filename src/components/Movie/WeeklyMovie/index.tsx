@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { NO_IMAGE } from "../../../constant/noImage";
@@ -17,15 +18,19 @@ const WeeklyMovie = ({ weekData }: DataProps) => {
         {weekData?.map((data: FilteredMovieDataProps) => {
           const { title, genre, openDt, audiAcc, link, image } = data;
           return (
-            <MovieCard
-              key={Math.random()}
-              title={title}
-              genre={genre}
-              openDt={openDt}
-              audiAcc={audiAcc ? parseInt(audiAcc).toLocaleString() : "0"}
-              link={link}
-              image={image ? image : NO_IMAGE}
-            />
+            <>
+              <Link href={link ? link : ""} target="_blank">
+                <MovieCard
+                  key={Math.random()}
+                  title={title}
+                  genre={genre}
+                  openDt={openDt}
+                  audiAcc={audiAcc ? parseInt(audiAcc).toLocaleString() : "0"}
+                  link={link}
+                  image={image ? image : NO_IMAGE}
+                />
+              </Link>
+            </>
           );
         })}
       </WeekMovieDataContainer>
