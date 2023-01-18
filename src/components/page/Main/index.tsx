@@ -5,6 +5,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 import DailyMovie from "../../Movie/DailyMovie";
+import WeeklyMovie from "../../Movie/WeeklyMovie";
 
 const MainPage = () => {
   const MOVIE_DAILY = "searchDailyBoxOfficeList";
@@ -14,8 +15,6 @@ const MainPage = () => {
     ["/api/movie", MOVIE_WEEK],
     fetcher
   );
-
-  console.log(weekList);
 
   return (
     <StyledContainer>
@@ -39,19 +38,9 @@ const MainPage = () => {
         </InputWrapper>
       </StyledMainVideo>
 
+      {/* Daily and Weekly movies */}
       <DailyMovie items={data} />
-
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
-      <h2>main</h2>
+      <WeeklyMovie weekData={weekList} />
     </StyledContainer>
   );
 };
@@ -62,9 +51,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-
   overflow: hidden;
-  /* padding: 20px 30px; */
 `;
 
 const StyledMainVideo = styled.div`

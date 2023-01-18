@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { DataProcessingProps } from "../../../pages/api/movie";
+import { FilteredMovieDataProps } from "../../../pages/api/movie";
 
 const MovieCard = ({
   rank,
@@ -11,10 +11,11 @@ const MovieCard = ({
   openDt,
   genre,
   image,
-}: DataProcessingProps) => {
+}: FilteredMovieDataProps) => {
   return (
     <CardWrapper>
-      <Ranking>{rank}</Ranking>
+      {rank && <Ranking>{rank}</Ranking>}
+
       <Image src={image!} width={150} height={200} alt="moviePoster" priority />
 
       <CardContainer>
