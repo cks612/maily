@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +6,7 @@ import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 import DailyMovie from "../../Movie/DailyMovie";
 import WeeklyMovie from "../../Movie/WeeklyMovie";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 const MainPage = () => {
   const MOVIE_DAILY = "searchDailyBoxOfficeList";
@@ -15,7 +16,22 @@ const MainPage = () => {
     ["/api/movie", MOVIE_WEEK],
     fetcher
   );
+  const [searchMovieTitle, setSearchMovieTitle] = useState("");
 
+  const handleChangeMovieTitle = useDebounce(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      setSearchMovieTitle(value);
+    },
+    200
+  );
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    window.open(
+      `https://movie.naver.com/movie/search/result.naver?query=${searchMovieTitle}&section=all&ie=utf8`
+    );
+  };
   return (
     <StyledContainer>
       {/* component */}
@@ -31,8 +47,11 @@ const MainPage = () => {
 
         {/* component */}
         <InputWrapper>
-          <InputContainer>
-            <SearchInput placeholder="영화 찾기" />
+          <InputContainer onSubmit={handleSubmit}>
+            <SearchInput
+              placeholder="영화 찾기"
+              onChange={handleChangeMovieTitle}
+            />
             <FontAwesomeIcon className="spinner" icon={faSearch} size="2x" />
           </InputContainer>
         </InputWrapper>
@@ -108,7 +127,7 @@ const InputWrapper = styled.div`
   }
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
