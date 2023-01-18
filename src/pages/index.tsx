@@ -1,8 +1,8 @@
 import React from "react";
-import MainPage from "../components/page/Main";
 import { fetcher } from "../lib/fetcher";
 import { GetStaticProps } from "next";
 import { SWRConfig, unstable_serialize } from "swr";
+import MainPage from "../components/page/Main";
 
 export default function Home({ fallback }: any) {
   return (

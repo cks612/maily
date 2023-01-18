@@ -19,9 +19,8 @@ const WeeklyMovie = ({ weekData }: DataProps) => {
           const { title, genre, openDt, audiAcc, link, image } = data;
           return (
             <>
-              <Link href={link ? link : ""} target="_blank">
+              <Link href={link ? link : ""} target="_blank" key={Math.random()}>
                 <MovieCard
-                  key={Math.random()}
                   title={title}
                   genre={genre}
                   openDt={openDt}
