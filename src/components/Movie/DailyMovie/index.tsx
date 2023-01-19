@@ -62,7 +62,7 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 450px;
+  height: 550px;
   padding: 20px 20px;
 `;
 
