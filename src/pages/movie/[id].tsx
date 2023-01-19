@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
-import ContentWrapper from "../../components/Content/ContentWrapper";
 import { useMovieStore } from "../../store";
 
 const MovieDetail = () => {
@@ -41,7 +40,7 @@ const MovieDetail = () => {
             </ContentContainer>
             <ContentContainer>
               <ContentTitle>감독 :</ContentTitle>
-              {data.directorNm!.map(data => (
+              {data.directorNm!.map((data: string) => (
                 <span key={Math.random()}>{data}</span>
               ))}
             </ContentContainer>

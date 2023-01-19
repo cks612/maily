@@ -1,13 +1,13 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
-import { fetcher } from "../../../lib/fetcher";
-import DailyMovie from "../../Movie/DailyMovie";
-import WeeklyMovie from "../../Movie/WeeklyMovie";
-import { useDebounce } from "../../../hooks/useDebounce";
-import { useMovieStore } from "../../../store";
+import { fetcher } from "lib/fetcher";
+import { useDebounce } from "@hooks/useDebounce";
+import WeeklyMovie from "@components/Movie/WeeklyMovie";
+import DailyMovie from "@components/Movie/DailyMovie";
+import { useMovieStore } from "@store/index";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MainPage = () => {
   const { setDailyMovieData, setWeeklyMovieData } = useMovieStore();

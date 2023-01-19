@@ -1,84 +1,10 @@
-import React from "react";
-import { MovieDataProps } from "../pages/api/movie";
-
-export interface SearchMovieProps {
-  status: string;
-  value?: SearchedDataProps[];
-}
-export interface SearchedDataProps {
-  DOCID?: string;
-  movieId?: string;
-  movieSeq?: string;
-  title?: string;
-  titleEng?: string;
-  titleOrg?: string;
-  titleEtc?: string;
-  prodYear?: string;
-  directors?: any;
-  actors?: any;
-  nation?: string;
-  company?: string;
-  plots?: any;
-  runtime?: string;
-  rating?: string;
-  genre?: string;
-  kmdbUrl?: string;
-  type?: string;
-  use?: string;
-  episodes?: string;
-  ratedYn?: string;
-  repRatDate?: string;
-  repRlsDate?: string;
-  ratings?: any;
-  keywords?: string;
-  posters?: string;
-  stlls?: string;
-  staffs?: string;
-  vods?: any;
-  openThtr?: string;
-  stat?: any;
-  screenArea?: string;
-  screenCnt?: string;
-  salesAcc?: string;
-  audiAcc?: string;
-  statSouce?: string;
-  statDate?: string;
-  themeSong?: string;
-  soundtrack?: string;
-  fLocation?: string;
-  Awards1?: string;
-  Awards2?: string;
-  regDate?: string;
-  modDate?: string;
-  Codes?: any;
-  CommCodes?: any;
-  ALIAS?: string;
-}
-export interface MovieDirectorsProps {
-  directorNm: string;
-  directorEnNm: string;
-  directorId: string;
-}
-
-export interface RatingProps {
-  ratingMain: string;
-  ratingDate: string;
-  ratingNo: string;
-  ratingGrade: string;
-  releaseDate: string;
-  runtime: string;
-}
-
-export interface ActorProps {
-  actorNm: string;
-  actorEnNm: string;
-  actorId: string;
-}
-
-export interface PlotProps {
-  plotLang: string;
-  plotText: string;
-}
+import {
+  ActorProps,
+  MovieDataProps,
+  MovieDirectorsProps,
+  RatingProps,
+  SearchMovieProps,
+} from "types";
 
 export const getFormatData = (
   movieData: MovieDataProps[],

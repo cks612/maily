@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { FilteredMovieDataProps } from "../../../pages/api/movie";
-import ContentTitle from "../../Content/ContentTitle";
-import MovieCard from "../MovieCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { NO_IMAGE } from "../../../constant/noImage";
 import Link from "next/link";
+import { FilteredMovieDataProps } from "types";
+import ContentTitle from "@components/Content/ContentTitle";
+import MovieCard from "../MovieCard";
+import { NO_IMAGE } from "constant/noImage";
 
 interface DataProps {
   items: FilteredMovieDataProps[];
