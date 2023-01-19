@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -7,8 +7,11 @@ import { fetcher } from "../../../lib/fetcher";
 import DailyMovie from "../../Movie/DailyMovie";
 import WeeklyMovie from "../../Movie/WeeklyMovie";
 import { useDebounce } from "../../../hooks/useDebounce";
+import { useMovieStore } from "../../../store";
 
 const MainPage = () => {
+  const { setDailyMovieData, setWeeklyMovieData } = useMovieStore();
+
   const MOVIE_DAILY = "searchDailyBoxOfficeList";
   const MOVIE_WEEK = "searchWeeklyBoxOfficeList";
   const { data, error } = useSWR(["/api/movie", MOVIE_DAILY], fetcher);
@@ -16,6 +19,12 @@ const MainPage = () => {
     ["/api/movie", MOVIE_WEEK],
     fetcher
   );
+
+  useEffect(() => {
+    setDailyMovieData(data);
+    setWeeklyMovieData(weekList);
+  }, []);
+
   const [searchMovieTitle, setSearchMovieTitle] = useState("");
 
   const handleChangeMovieTitle = useDebounce(

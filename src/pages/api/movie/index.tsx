@@ -35,6 +35,7 @@ export interface MovieDataProps {
   userRating?: string;
 }
 export interface FilteredMovieDataProps {
+  rnum: string;
   rank?: string;
   title?: string;
   openDt?: string;
