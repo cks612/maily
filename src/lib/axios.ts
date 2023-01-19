@@ -1,5 +1,4 @@
 import axios from "axios";
-import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET } from "../constant/auth";
 
 export const MOVIE = axios.create({
   baseURL: "http://kobis.or.kr",

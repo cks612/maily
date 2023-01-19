@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { FilteredMovieDataProps } from "../../../pages/api/movie";
+import { FilteredMovieDataProps } from "types";
 
 const MovieCard = ({
   rank,

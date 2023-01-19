@@ -1,8 +1,8 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import type { ParsedUrlQuery } from "querystring";
-import { FilteredMovieDataProps } from "../pages/api/movie";
 import { Dispatch, SetStateAction } from "react";
+import { FilteredMovieDataProps } from "../types";
 
 export interface MovieStoreProps {
   movieData: FilteredMovieDataProps[];

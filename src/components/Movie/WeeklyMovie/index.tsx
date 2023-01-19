@@ -1,11 +1,11 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
-import { NO_IMAGE } from "../../../constant/noImage";
-import { FilteredMovieDataProps } from "../../../pages/api/movie";
-import ContentTitle from "../../Content/ContentTitle";
-import ContentWrapper from "../../Content/ContentWrapper";
+import ContentTitle from "@components/Content/ContentTitle";
+import ContentWrapper from "@components/Content/ContentWrapper";
 import MovieCard from "../MovieCard";
+import { NO_IMAGE } from "constant/noImage";
+import { FilteredMovieDataProps } from "types";
 
 interface DataProps {
   weekData: FilteredMovieDataProps[];
