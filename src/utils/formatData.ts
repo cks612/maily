@@ -92,6 +92,7 @@ export const getFormatData = (
     );
 
     return {
+      rnum: data.rnum,
       rank: data.rank,
       title: data.movieNm,
       openDt: data.openDt,

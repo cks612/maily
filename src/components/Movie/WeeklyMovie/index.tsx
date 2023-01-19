@@ -16,11 +16,12 @@ const WeeklyMovie = ({ weekData }: DataProps) => {
       <ContentTitle>주간 박스 오피스</ContentTitle>
       <WeekMovieDataContainer>
         {weekData?.map((data: FilteredMovieDataProps) => {
-          const { title, genre, openDt, audiAcc, link, image } = data;
+          const { rnum, title, genre, openDt, audiAcc, link, image } = data;
           return (
             <>
-              <Link href={link ? link : ""} target="_blank" key={Math.random()}>
+              <Link href={`/movie/${rnum}`} target="_blank" key={Math.random()}>
                 <MovieCard
+                  rnum={rnum}
                   title={title}
                   genre={genre}
                   openDt={openDt}
