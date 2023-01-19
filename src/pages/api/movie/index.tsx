@@ -40,12 +40,13 @@ export interface FilteredMovieDataProps {
   title?: string;
   openDt?: string;
   audiAcc?: string;
-  directorNm?: MovieDirectorsProps;
+  directorNm?: string[];
   link?: string;
   image?: string;
-  ratingGrade?: RatingProps;
+  ratingGrade?: string;
   actor?: ActorProps;
   genre?: string;
+  plot?: string;
 }
 const naverNews = async (req: NextApiRequest, res: NextApiResponse) => {
   const dailyDate = formatDate("day");

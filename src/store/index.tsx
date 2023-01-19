@@ -8,6 +8,7 @@ export interface MovieStoreProps {
   movieData: FilteredMovieDataProps[];
   setDailyMovieData: Dispatch<SetStateAction<FilteredMovieDataProps[] | any>>;
   setWeeklyMovieData: Dispatch<SetStateAction<FilteredMovieDataProps[] | any>>;
+  filterMovieData: (query: ParsedUrlQuery) => FilteredMovieDataProps[];
 }
 
 export const useMovieStore = create<MovieStoreProps>()(
@@ -18,15 +19,13 @@ export const useMovieStore = create<MovieStoreProps>()(
         set({ movieData: data }),
       setWeeklyMovieData: (data: FilteredMovieDataProps[]) =>
         set({ movieData: data }),
-      // todoData: [],
 
-      // filterToFindTodo: (query: ParsedUrlQuery) => {
-      //   const { id } = query;
-
-      //   return get().todoData.filter(
-      //     (item: TodoItemProps) => item.data.id === id
-      //   );
-      // },
+      filterMovieData: (query: ParsedUrlQuery) => {
+        const { id } = query;
+        return get().movieData.filter(
+          (data: FilteredMovieDataProps) => data.rnum === id
+        );
+      },
     }),
 
     {
